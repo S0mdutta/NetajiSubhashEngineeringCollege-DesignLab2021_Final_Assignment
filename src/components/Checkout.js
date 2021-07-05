@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated, getCartProducts } from '../repository';
+import { getCartProducts } from '../repository';
 import {  Redirect, Link } from 'react-router-dom';
 
 export default class Checkout extends React.Component {
@@ -24,7 +24,7 @@ export default class Checkout extends React.Component {
 	}
 
 	render() {
-		//if (!isAuthenticated()) return (<Redirect to="/login" />);
+		
 		const { products, total } =  this.state;
 		return (
 			<div className=" container">
@@ -42,7 +42,7 @@ export default class Checkout extends React.Component {
 					)
 				}
 				<hr/>
-				{ products.length ? <div><h4><small>Total Amount:</small><span className="float-right text-primary">Rs{total}</span></h4><hr/></div>: ''}
+				{ products.length ? <div><h4><small>Total Amount:</small><span className="float-right text-primary">Rs {total}</span></h4><hr/></div>: ''}
 				{ !products.length ? <h3 className="text-warning">No item on the cart</h3>: ''}
 				{ products.length ? <button className="btn btn-success float-right" onClick={() => alert('Proceed to Pay')}>Pay</button>: '' }
 				<Link to="/"><button className="btn btn-danger float-right" style={{ marginLeft: "10px" }}>Cancel</button></Link>

@@ -38,15 +38,5 @@ const products = [
 
 
 
-const users = [
-   {
-      'name': 'user',
-      'password': 'qwerty'
-    },
-    {
-      'name': 'example',
-      'password': 'qwerty'
-    }
-];
 
-module.exports = { 'products': products, users: users }
+module.exports = { 'products': products }

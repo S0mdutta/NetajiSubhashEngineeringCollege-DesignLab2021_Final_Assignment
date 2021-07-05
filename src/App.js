@@ -4,7 +4,6 @@ import Products from './components/ProductList';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import {  BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import { isAuthenticated } from './repository';
 
 
 class App extends Component {
@@ -14,7 +13,7 @@ class App extends Component {
   }
   
   render() {
-    const auth = isAuthenticated();
+
     return (
       <Router>
         <div>
@@ -28,7 +27,6 @@ class App extends Component {
                 <div className="navbar-nav">
                   <Link className="nav-item nav-link" to="/">Products</Link>
                   <Link className="nav-item nav-link" to="/cart">Cart</Link>
-                  { (auth) ? <Link className="nav-item nav-link" to="/checkout">Checkout</Link>: ''}
                   
                 </div>
               </div>

@@ -2,7 +2,6 @@
 
 const express = require('express');
 const app = express();
-const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const data = require('./data');
@@ -12,10 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+//returns all products from data.js, used in displaying product list
 app.get('/api/products', (req, res) => {
   return res.json(data.products);
 });
 
+//returns products from data.js that are in cart in local storage. used in displaying cart list
 app.post('/api/products', (req, res) => {
   let products = [], id = null;
   let cart = JSON.parse(req.body.cart);
@@ -30,25 +31,8 @@ app.post('/api/products', (req, res) => {
   return res.json(products);
 });
 
-app.post('/api/auth', (req,res) => {
-  let user = data.users.filter((user) => {
-    return user.name == req.body.name && user.password == req.body.password;
-  });
-  if (user.length){
-      // create a token using user name and password vaild for 2 hours
-      let token_payload = {name: user[0].name, password: user[0].password};
-      let token = jwt.sign(token_payload, "jwt_secret_password", { expiresIn: '2h' });
-      let response = { message: 'Token Created, Authentication Successful!', token: token };
-
-      // return the information including token as JSON
-      return res.status(200).json(response);
-
-  } else {
-      return res.status("409").json("Authentication failed. admin not found.");
-  }
-});
 
 const PORT = 5000;
 
 app.listen(PORT);
-console.log('api runnging on port ' + PORT + ': ');
+console.log('api running on port ' + PORT + ': ');
